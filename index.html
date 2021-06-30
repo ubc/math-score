@@ -172,11 +172,11 @@
             <!-- Content Area -->
             <div class="content expand" role="main">
                 <h1>Precalculus Scoring</h1>
-                <p>Please enter the 6-digit score you received from <a href="http://webwork.elearning.ubc.ca">Webwork</a> below. The form will calculate your results in the six areas you were tested in, based on a maximum score of "6" for each section.</p>
+                <p>Please enter the 4-digit score you received from the Diagnostic Test below. The form will display your results in the four areas you were tested in, based on a maximum score of "8" for each section.</p>
                 <form class="form-box form-inline">
                     <legend>Enter Webwork test score</legend>
                     <div class="input-append">
-                        <input id="score" name="score" type="text" maxlength="6" placeholder="e.g., 663663" />
+                        <input id="score" name="score" type="text" maxlength="4" placeholder="e.g., 2468" />
                         <button class="btn btn-primary" type="submit" onclick="computeScore(); return false;">Calculate</button>
                     </div>
                 </form>
@@ -265,7 +265,7 @@
                     var message = "";
                     var color = "";
                     var icon = "";
-                    if (character >= 4) {
+                    if (character >= 5) {
                         // the values for a passing score
                         message = "You have passed!";
                         color = "green";
@@ -277,45 +277,39 @@
                         icon = '<i class="icon-check-empty"></i>';
                     }
                     // account for numbers that are too high (top value is 6)
-                    if (character > 6) {
-                        character = 6;
+                    if (character > 8) {
+                        character = 8;
                     }
                     // account for values that are not numbers
                     if (isNaN(character)) {
                         character = 0;
                     }
                     // calculate the rounded percentage (out of a maximum score of 6)
-                    var percent = Math.floor((character / 6) * 100) + "% Mark";
+                    var percent = Math.floor((character / 8) * 100) + "% Mark";
                     // set up variables for section heading
                     var sectionNum = parseInt(index+1, 10);
                     var sectionName = "";
                     // section name based on index (always the same)
                     switch(index) {
                         case 0:
-                            sectionName = "Numbers";
+                            sectionName = "Basic Algebra";
                             break;
                         case 1:
-                            sectionName = "Equations";
+                            sectionName = "Advanced Algebra";
                             break;
                         case 2:
-                            sectionName = "Inequalities";
+                            sectionName = "Functions and Graph";
                             break;
                         case 3:
-                            sectionName = "Functions";
-                            break;
-                        case 4:
-                            sectionName = "Graphs";
-                            break;
-                        case 5:
-                            sectionName = "Trigonometry";
+                            sectionName = "Triangles and Trigonometry";
                             break;
                     }
                     // now build out the message using the values determined
                     yourResult += '<h3>'+icon+' Section '+sectionNum+' - '+sectionName+'</h3><div class="section-result"><p class="big-text '+color+'-text"><strong>'+percent+'</strong>: '+message+'</p>';
                     // add link/info for Canvas if a failing score
-                    if (character <= 3) {
-                        yourResult += '<p class="alert alert-info"><strong>To improve your mark:</strong> Please log in to <a href="https://canvas.ubc.ca/" target="_blank">Canvas</a> to read and practice the materials in the <em>'+sectionName+'</em> section of the "Precalculus Review" course.</p>';
-                    }
+                    //if (character <= 3) {
+                    //    yourResult += '<p class="alert alert-info"><strong>To improve your mark:</strong> Please log in to <a href="https://canvas.ubc.ca/" target="_blank">Canvas</a> to read and practice the materials in the <em>'+sectionName+'</em> section of the //"Precalculus Review" course.</p>';
+                    //}
                     // close the message
                     yourResult += '</div>';
                     // add a dividing line for all but the last section
